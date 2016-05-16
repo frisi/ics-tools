@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python
 
 from icalendar import Calendar
 import sys
@@ -34,7 +34,7 @@ if len(sys.argv) < 3:
     print "Usage: sort_ics.py in.ics out.ics"
     sys.exit(1)
 
-cal = Calendar.from_string(open(sys.argv[1], 'rb').read())
+cal = Calendar.from_ical(open(sys.argv[1], 'rb').read())
 
 cal.subcomponents.sort(uid_sort)
 
@@ -43,5 +43,5 @@ cal.subcomponents.sort(uid_sort)
 # print comps
 
 f = open(sys.argv[2], 'wb')
-f.write(cal.as_string())
+f.write(cal.to_ical())
 f.close()
